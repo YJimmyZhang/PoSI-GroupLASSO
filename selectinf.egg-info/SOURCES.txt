@@ -5,6 +5,7 @@ selectinf/__init__.py
 selectinf/base.py
 selectinf/group_lasso_query.py
 selectinf/group_lasso_query_quasi.py
+selectinf/lasso.py
 selectinf/posterior_inference_jacobian.py
 selectinf/query_jacobian.py
 selectinf/query_jacobian_quasi.py

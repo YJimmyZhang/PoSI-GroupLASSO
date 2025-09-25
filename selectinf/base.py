@@ -359,6 +359,7 @@ def target_query_Interactspec(query_spec,
     U1 = regress_target_score.T.dot(prec_target)
     U2 = U1.T.dot(QS.M2.dot(U1))
     U3 = U1.T.dot(QS.M3.dot(U1))
+    # Equivalently: U4 = QS.M3.dot(U1)
     U4 = QS.M1.dot(QS.opt_linear).dot(QS.cond_cov).dot(QS.opt_linear.T.dot(QS.M1.T.dot(U1)))
     U5 = U1.T.dot(QS.M1.dot(QS.opt_linear))
 

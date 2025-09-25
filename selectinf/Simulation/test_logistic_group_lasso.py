@@ -42,7 +42,7 @@ def calculate_F1_score(beta_true, selection):
     else:
         precision = 0
     recall = (nonzero_true * selection).sum() / nonzero_true.sum()
-    print("precision:", precision, "recall", recall)
+    #print("precision:", precision, "recall", recall)
     if precision + recall > 0:
         return 2 * precision * recall / (precision + recall)
     else:
@@ -55,7 +55,7 @@ def naive_inference(X, Y, groups, beta, const,
     sigma_ = np.std(Y)
     #weights = dict([(i, 0.5) for i in np.unique(groups)])
     weights = dict([(i, weight_frac * sigma_ * np.sqrt(2 * np.log(p))) for i in np.unique(groups)])
-    print("Naive l1 weights:", weights)
+    #print("Naive l1 weights:", weights)
 
     conv = const(X=X,
                  successes=Y,
@@ -151,7 +151,7 @@ def naive_inference(X, Y, groups, beta, const,
 def randomization_inference(X, Y, n, p, beta,
                             groups, hess=None, proportion=0.5,
                             weight_frac=1, level=0.9, solve_only = False,
-                            p_val=False):
+                            p_val=False, use_iso=False, randomizer_scale=1.):
 
     ## solve_only: bool variable indicating whether
     ##              1) we only need the solver's output
@@ -159,9 +159,13 @@ def randomization_inference(X, Y, n, p, beta,
     ##              2) we also want inferential results
 
     def estimate_hess():
-        loglike = rr.glm.logistic(X, successes=Y, trials=np.ones(n))
+        from sklearn.linear_model import LogisticRegression
+        model_no_intercept = LogisticRegression(fit_intercept=False)
+        model_no_intercept.fit(X, Y)
+        beta_full = np.array(model_no_intercept.coef_).squeeze()
+        #loglike = rr.glm.logistic(X, successes=Y, trials=np.ones(n))
         # For LASSO, this is the OLS solution on X_{E,U}
-        beta_full = restricted_estimator(loglike, np.array([True] * p))
+        #beta_full = restricted_estimator(loglike, np.array([True] * p))
         def pi_hess(x):
             return np.exp(x) / (1 + np.exp(x)) ** 2
 
@@ -170,21 +174,31 @@ def randomization_inference(X, Y, n, p, beta,
 
         return X.T @ W @ X * (1 - proportion) / proportion
 
-    if hess is None:
+    if not use_iso and hess is None:
         hess = estimate_hess()
 
     sigma_ = np.std(Y)
     #weights = dict([(i, 0.5) for i in np.unique(groups)])
     weights = dict([(i, weight_frac * sigma_ * np.sqrt(2 * np.log(p))) for i in np.unique(groups)])
 
-    conv = group_lasso.logistic(X=X,
-                                successes=Y,
-                                trials=np.ones(n),
-                                groups=groups,
-                                weights=weights,
-                                useJacobian=True,
-                                ridge_term=0.,
-                                cov_rand=hess)
+    if hess is not None:
+        conv = group_lasso.logistic(X=X,
+                                    successes=Y,
+                                    trials=np.ones(n),
+                                    groups=groups,
+                                    weights=weights,
+                                    useJacobian=True,
+                                    ridge_term=0.,
+                                    cov_rand=hess)
+    else:
+        # Isotropic
+        conv = group_lasso.logistic(X=X,
+                                    successes=Y,
+                                    trials=np.ones(n),
+                                    groups=groups,
+                                    weights=weights,
+                                    useJacobian=True,
+                                    randomizer_scale=randomizer_scale * sigma_)
 
     signs, _ = conv.fit()
     nonzero = (signs != 0)
