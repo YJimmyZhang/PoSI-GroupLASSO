@@ -96,16 +96,16 @@ def gaussian_instance(n=100,
     Returns
     -------
 
-    X : float((n,p))
+    X : np.float((n,p))
         Design matrix.
 
-    y : float(n)
+    y : np.float(n)
         Response vector.
 
-    beta : float(p)
+    beta : np.float(p)
         True coefficients.
 
-    active : int(s)
+    active : np.int(s)
         Non-zero pattern.
 
     sigma : float
@@ -144,7 +144,7 @@ def gaussian_instance(n=100,
         beta *= np.sqrt(n)
         sigmaX = sigmaX / np.multiply.outer(scaling, scaling)
 
-    active = np.zeros(p, bool)
+    active = np.zeros(p, np.bool)
     active[beta != 0] = True
 
     # noise model
@@ -210,16 +210,16 @@ def logistic_instance(n=100,
     Returns
     -------
 
-    X : float((n,p))
+    X : np.float((n,p))
         Design matrix.
 
-    y : float(n)
+    y : np.float(n)
         Response vector.
 
-    beta : float(p)
+    beta : np.float(p)
         True coefficients.
 
-    active : int(s)
+    active : np.int(s)
         Non-zero pattern.
 
     sigmaX : np.ndarray((p,p))
@@ -254,7 +254,7 @@ def logistic_instance(n=100,
         beta *= np.sqrt(n)
         sigmaX = sigmaX / np.multiply.outer(scaling, scaling)
 
-    active = np.zeros(p, bool)
+    active = np.zeros(p, np.bool)
     active[beta != 0] = True
 
     eta = linpred = np.dot(X, beta) 
@@ -314,16 +314,16 @@ def poisson_instance(n=100,
     Returns
     -------
 
-    X : float((n,p))
+    X : np.float((n,p))
         Design matrix.
 
-    y : float(n)
+    y : np.float(n)
         Response vector.
 
-    beta : float(p)
+    beta : np.float(p)
         True coefficients.
 
-    active : int(s)
+    active : np.int(s)
         Non-zero pattern.
 
     sigmaX : np.ndarray((p,p))
@@ -358,7 +358,7 @@ def poisson_instance(n=100,
         beta *= np.sqrt(n)
         sigmaX = sigmaX / np.multiply.outer(scaling, scaling)
 
-    active = np.zeros(p, bool)
+    active = np.zeros(p, np.bool)
     active[beta != 0] = True
 
     eta = linpred = np.dot(X, beta) 
@@ -421,19 +421,19 @@ def cox_instance(n=100,
     Returns
     -------
 
-    X : float((n,p))
+    X : np.float((n,p))
         Design matrix.
 
-    T : float(n)
+    T : np.float(n)
         Response vector of times.
 
-    S : bool(n)
+    S : np.bool(n)
         Right-censoring status.
 
-    beta : float(p)
+    beta : np.float(p)
         True coefficients.
 
-    active : int(s)
+    active : np.int(s)
         Non-zero pattern.
 
     sigmaX : np.ndarray((p,p))
@@ -469,7 +469,7 @@ def cox_instance(n=100,
         beta *= np.sqrt(n)
         sigmaX = sigmaX / np.multiply.outer(scaling, scaling)
 
-    active = np.zeros(p, bool)
+    active = np.zeros(p, np.bool)
     active[beta != 0] = True
 
     eta = linpred = np.dot(X, beta) 
@@ -530,11 +530,11 @@ def HIV_NRTI(drug='3TC',
 
     NRTI_specific = NRTI.from_records(np.array(NRTI_specific).T, columns=NRTI_muts)
 
-    X_NRTI = np.array(NRTI_specific, float)
+    X_NRTI = np.array(NRTI_specific, np.float)
     Y = np.asarray(NRTI[drug]) # shorthand
-    keep = ~np.isnan(Y).astype(bool)
+    keep = ~np.isnan(Y).astype(np.bool)
     X_NRTI = X_NRTI[np.nonzero(keep)]; Y=Y[keep]
-    Y = np.array(np.log(Y), float); 
+    Y = np.array(np.log(Y), np.float); 
 
     if standardize:
         Y -= Y.mean()
@@ -583,13 +583,13 @@ def gaussian_group_instance(n=100, p=200, sgroup=7, sigma=5, rho=0., signal=7,
         Else design is AR.
     Returns
     -------
-    X : float((n,p))
+    X : np.float((n,p))
         Design matrix.
-    y : float(n)
+    y : np.float(n)
         Response vector.
-    beta : float(p)
+    beta : np.float(p)
         True coefficients.
-    active : int(s)
+    active : np.int(s)
         Non-zero pattern.
     sigma : float
         Noise level.

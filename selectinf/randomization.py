@@ -66,10 +66,10 @@ class randomization(rr.smooth_atom):
         Evaluate the gradient of the log-density.
         Parameters
         ----------
-        perturbation : float
+        perturbation : np.float
         Returns
         -------
-        gradient : float
+        gradient : np.float
         """
         return self.smooth_objective(perturbation, mode='grad')
 
@@ -78,7 +78,7 @@ class randomization(rr.smooth_atom):
         Evaluate the log-density.
         Parameters
         ----------
-        perturbation : float
+        perturbation : np.float
         Returns
         -------
         value : float
@@ -141,7 +141,7 @@ class randomization(rr.smooth_atom):
         Gaussian noise with a given covariance.
         Parameters
         ----------
-        covariance : float((*,*))
+        covariance : np.float((*,*))
             Positive definite covariance matrix. Non-negative definite
             will raise an error.
         """
@@ -174,7 +174,7 @@ class randomization(rr.smooth_atom):
         Gaussian noise with a given covariance.
         Parameters
         ----------
-        covariance : float((*,*))
+        covariance : np.float((*,*))
             Positive definite covariance matrix. Non-negative definite
             will raise an error.
         """
@@ -352,7 +352,7 @@ class split(randomization):
         inv_frac = n / m
         quadratic = rr.identity_quadratic(epsilon, 0, 0, 0)
         m, n = self.subsample_size, self.total_size # shorthand
-        idx = np.zeros(n, bool)
+        idx = np.zeros(n, np.bool)
         idx[:m] = 1
         np.random.shuffle(idx)
 

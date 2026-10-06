@@ -25,7 +25,7 @@ def crit_func(test_statistic, left_cut, right_cut):
     Parameters
     ----------
 
-    test_statistic : float
+    test_statistic : np.float
         Observed value of test statistic.
 
     left_cut : (float, float)
@@ -37,7 +37,7 @@ def crit_func(test_statistic, left_cut, right_cut):
     Returns
     -------
 
-    decision : float
+    decision : np.float
 
     """
     CL, gammaL = left_cut
@@ -71,16 +71,16 @@ class discrete_family(object):
         Parameters
         ----------
 
-        sufficient_stat : `float((n))`
+        sufficient_stat : `np.float((n))`
 
-        weights : `float(n)`
+        weights : `np.float(n)`
 
         Notes
         -----
 
         The weights are normalized to sum to 1.
         """
-        xw = np.array(sorted(zip(sufficient_stat, weights)), float)
+        xw = np.array(sorted(zip(sufficient_stat, weights)), np.float)
         self._x = xw[:,0]
         self._w = xw[:,1]
         self._lw = np.log(xw[:,1])
@@ -147,7 +147,7 @@ class discrete_family(object):
         Returns
         -------
 
-        pdf : float
+        pdf : np.float
         
         """
         self.theta = theta # compute partition if necessary
@@ -177,7 +177,7 @@ class discrete_family(object):
         Returns
         -------
 
-        cdf : float
+        cdf : np.float
 
         """
         pdf = self.pdf(theta)
@@ -214,7 +214,7 @@ class discrete_family(object):
         Returns
         -------
 
-        ccdf : float
+        ccdf : np.float
 
         """
         pdf = self.pdf(theta)
@@ -245,7 +245,7 @@ class discrete_family(object):
         Returns
         -------
 
-        E : float
+        E : np.float
 
         """
         T = np.asarray(func(self.sufficient_stat))
@@ -274,7 +274,7 @@ class discrete_family(object):
         Returns
         -------
 
-        var : float
+        var : np.float
 
         """
 
@@ -297,7 +297,7 @@ class discrete_family(object):
         Returns
         -------
 
-        cov : float
+        cov : np.float
 
         """
 
@@ -364,7 +364,7 @@ class discrete_family(object):
         Returns
         -------
 
-        decision : bool
+        decision : np.bool
              Is the null hypothesis $H_0:\theta=\theta_0$ rejected?
    
         Notes
@@ -414,7 +414,7 @@ class discrete_family(object):
         Returns
         -------
 
-        decision : bool
+        decision : np.bool
              Is the null hypothesis $H_0:\theta=\theta_0$ rejected?
    
         Notes
@@ -548,7 +548,7 @@ class discrete_family(object):
         Returns
         -------
 
-        decision : bool
+        decision : np.bool
              Is the null hypothesis $H_0:\theta=\theta_0$ rejected?
    
         Notes

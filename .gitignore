@@ -1,7 +1,0 @@
-__pycache__/
-*.pyc
-.fuse_hidden*
-.venv/
-.DS_Store
-.idea/
-/*.csv

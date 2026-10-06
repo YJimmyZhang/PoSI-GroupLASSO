@@ -89,16 +89,16 @@ def gaussian_group_instance(n=100, p=200, sgroup=7,
     Returns
     -------
 
-    X : float((n,p))
+    X : np.float((n,p))
         Design matrix.
 
-    y : float(n)
+    y : np.float(n)
         Response vector.
 
-    beta : float(p)
+    beta : np.float(p)
         True coefficients.
 
-    active : int(s)
+    active : np.int(s)
         Non-zero pattern.
 
     sigma : float
@@ -295,16 +295,16 @@ def logistic_group_instance(n=100, p=200, sgroup=7,
     Returns
     -------
 
-    X : float((n,p))
+    X : np.float((n,p))
         Design matrix.
 
-    y : float(n)
+    y : np.float(n)
         Response vector.
 
-    beta : float(p)
+    beta : np.float(p)
         True coefficients.
 
-    active : int(s)
+    active : np.int(s)
         Non-zero pattern.
 
     sigma : float
@@ -506,16 +506,16 @@ def poisson_group_instance(n=100, p=200, sgroup=7,
     Returns
     -------
 
-    X : float((n,p))
+    X : np.float((n,p))
         Design matrix.
 
-    y : float(n)
+    y : np.float(n)
         Response vector.
 
-    beta : float(p)
+    beta : np.float(p)
         True coefficients.
 
-    active : int(s)
+    active : np.int(s)
         Non-zero pattern.
 
     sigma : float
@@ -690,16 +690,16 @@ def quasi_poisson_group_instance(n=100, p=200, sgroup=7,
     Returns
     -------
 
-    X : float((n,p))
+    X : np.float((n,p))
         Design matrix.
 
-    y : float(n)
+    y : np.float(n)
         Response vector.
 
-    beta : float(p)
+    beta : np.float(p)
         True coefficients.
 
-    active : int(s)
+    active : np.int(s)
         Non-zero pattern.
 
     sigma : float
