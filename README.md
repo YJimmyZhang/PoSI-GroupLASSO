@@ -2,15 +2,24 @@
 Post-selection Inference for Group Lasso Penalized M-Estimators
 
 ## Installation
-    virtualenv env3 -p python3 (alternatively virtualenv env3 -p python3.10)
-    source env3/bin/activate
-    pip install -r requirements.txt
-To install the package `regreg`, do:
 
-    pip install git+https://github.com/regreg/regreg.git
+Tested with Python 3.11 on macOS 26. Requires `uv` (https://docs.astral.sh/uv/).
 
-A more detailed tutorial of installation can be found at `selectinf/Replicability/replication_tutorial.ipynb` 
-in this repository.
+```bash
+git clone https://github.com/YJimmyZhang/PoSI-GroupLASSO.git
+cd PoSI-GroupLASSO
+uv venv --python 3.11 --managed-python .venv
+source .venv/bin/activate          # Windows: .venv\Scripts\activate
+uv pip install "numpy<2" cython setuptools
+uv pip install -r requirements-working.txt --no-build-isolation
+```
+
+Check:
+
+```bash
+python -c "import regreg, selectinf; print('ok')"
+python -m selectinf.Simulation.gaussian_simulation 0 2
+```
 
 ## Potential Issues & Solutions
 1. We used the Poisson regression functionality in `regreg` to solve for certain parameters
