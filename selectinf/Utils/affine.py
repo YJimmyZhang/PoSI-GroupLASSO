@@ -46,7 +46,7 @@ class constraints(object):
 
     >>> positive = constraints(-np.identity(2), np.zeros(2))
     >>> Y = np.array([3, 4.4])
-    >>> eta = np.array([1, 1], np.float)
+    >>> eta = np.array([1, 1], float)
     >>> list(positive.interval(eta, Y))  # doctest: +NORMALIZE_WHITESPACE +ELLIPSIS
     [4.62...,  10.17...]
     >>> positive.pivot(eta, Y) # doctest: +ELLIPSIS 
@@ -69,19 +69,19 @@ class constraints(object):
         Parameters
         ----------
 
-        linear_part : np.float((q,p))
+        linear_part : float((q,p))
             The linear part, $A$ of the affine constraint
             $\{z:Az \leq b\}$. 
 
-        offset: np.float(q)
+        offset: float(q)
             The offset part, $b$ of the affine constraint
             $\{z:Az \leq b\}$. 
 
-        covariance : np.float((p,p))
+        covariance : float((p,p))
             Covariance matrix of Gaussian distribution to be 
             truncated. Defaults to `np.identity(self.dim)`.
 
-        mean : np.float(p)
+        mean : float(p)
             Mean vector of Gaussian distribution to be 
             truncated. Defaults to `np.zeros(self.dim)`.
 
@@ -181,10 +181,10 @@ class constraints(object):
         Parameters
         ----------
 
-        linear_part : np.float((k,q))
+        linear_part : float((k,q))
              Linear part of equality constraint, `C` above.
 
-        value : np.float(k)
+        value : float(k)
              Value of equality constraint, `b` above.
 
         rank : int
@@ -236,27 +236,27 @@ class constraints(object):
         Parameters
         ----------
 
-        direction_of_interest: np.float
+        direction_of_interest: float
             A direction $\eta$ for which we may want to form 
             selection intervals or a test.
 
-        Y : np.float
+        Y : float
             A realization of $N(\mu,\Sigma)$ where 
             $\Sigma$ is `self.covariance`.
 
         Returns
         -------
 
-        L : np.float
+        L : float
             Lower truncation bound.
 
-        Z : np.float
+        Z : float
             The observed $\eta^TY$
 
-        U : np.float
+        U : float
             Upper truncation bound.
 
-        S : np.float
+        S : float
             Standard deviation of $\eta^TY$.
 
         
@@ -282,11 +282,11 @@ class constraints(object):
         Parameters
         ----------
 
-        direction_of_interest: np.float
+        direction_of_interest: float
             A direction $\eta$ for which we may want to form 
             selection intervals or a test.
 
-        Y : np.float
+        Y : float
             A realization of $N(0,\Sigma)$ where 
             $\Sigma$ is `self.covariance`.
 
@@ -296,7 +296,7 @@ class constraints(object):
         Returns
         -------
 
-        P : np.float
+        P : float
             $p$-value of corresponding test.
 
         Notes
@@ -340,12 +340,12 @@ class constraints(object):
         Parameters
         ----------
 
-        direction_of_interest: np.float
+        direction_of_interest: float
 
             A direction $\eta$ for which we may want to form 
             selection intervals or a test.
 
-        Y : np.float
+        Y : float
 
             A realization of $N(0,\Sigma)$ where 
             $\Sigma$ is `self.covariance`.
@@ -532,19 +532,19 @@ def interval_constraints(support_directions,
     Parameters
     ----------
 
-    support_directions : np.float
+    support_directions : float
          Matrix specifying constraint, $A$.
 
-    support_offsets : np.float
+    support_offsets : float
          Offset in constraint, $b$.
 
-    covariance : np.float
+    covariance : float
          Covariance matrix of `observed_data`.
 
-    observed_data : np.float
+    observed_data : float
          Observations.
 
-    direction_of_interest : np.float
+    direction_of_interest : float
          Direction in which we're interested for the
          contrast.
 
@@ -622,19 +622,19 @@ def selection_interval(support_directions,
     Parameters
     ----------
 
-    support_directions : np.float
+    support_directions : float
          Matrix specifying constraint, $A$.
 
-    support_offset : np.float
+    support_offset : float
          Offset in constraint, $b$.
 
-    covariance : np.float
+    covariance : float
          Covariance matrix of `observed_data`.
 
-    observed_data : np.float
+    observed_data : float
          Observations.
 
-    direction_of_interest : np.float
+    direction_of_interest : float
          Direction in which we're interested for the
          contrast.
 

@@ -257,7 +257,7 @@ def full_targets(loglike,
 
     X, y = loglike.data
     n, p = X.shape
-    features_bool = np.zeros(p, np.bool)
+    features_bool = np.zeros(p, bool)
     features_bool[features] = True
     features = features_bool
 

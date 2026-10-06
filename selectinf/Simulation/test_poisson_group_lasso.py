@@ -305,7 +305,7 @@ def data_splitting(X, Y, n, p, beta, groups, proportion=0.5, weight_frac=1,
     if (nonzero is None) or (subset_select is None):
         # print("(Poisson Data Splitting) Selection done without carving")
         pi_s = proportion
-        subset_select = np.zeros(n, np.bool)
+        subset_select = np.zeros(n, bool)
         subset_select[:int(pi_s * n)] = True
         n1 = subset_select.sum()
         n2 = n - n1
